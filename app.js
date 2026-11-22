@@ -63,7 +63,7 @@ const redes = [{ rede: "whatsapp", url: linkWhatsApp(MENSAGEM_GERAL) }, ...REDES
 document.getElementById("redes").innerHTML = redes
   .map(({ rede, url }) =>
     url
-      ? `<li><a href="${texto(url)}" target="_blank" rel="noopener" aria-label="${NOMES[rede] || rede}">${icone(rede)}</a></li>`
+      ? `<li><a href="${texto(url)}"${url.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener"'} aria-label="${NOMES[rede] || rede}">${icone(rede)}</a></li>`
       : `<li><span title="${NOMES[rede] || rede}: preencha a url no config.js">${icone(rede)}</span></li>`
   )
   .join("");

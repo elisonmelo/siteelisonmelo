@@ -41,9 +41,8 @@ const MENSAGEM_GERAL = "Oi, Elison. Vim pelo seu link da bio e quero conversar."
 
 // Redes sociais (os ícones abaixo da frase). Deixe a url vazia para
 // manter o ícone apagado; apague a linha para remover o ícone.
-//   rede: "instagram" | "linkedin" | "email"
+//   rede: "instagram" | "linkedin" | "email"  (email usa "mailto:endereco")
 const REDES = [
   { rede: "instagram", url: "https://www.instagram.com/desenvor/" },
-  { rede: "linkedin", url: "" },  // ex: "https://linkedin.com/in/seuusuario"
-  { rede: "email", url: "" },     // ex: "mailto:voce@seudominio.com"
+  { rede: "email", url: "mailto:elisonrdm@gmail.com" },
 ];
