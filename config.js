@@ -5,7 +5,7 @@
 
 // Número do WhatsApp só com dígitos: DDI + DDD + número.
 // Exemplo: "5511999999999"
-const WHATSAPP = "";
+const WHATSAPP = "558181366219";
 
 // Links principais. Cada item vira um botão.
 //   icone:     "crescimento" | "sistema" | "site"
