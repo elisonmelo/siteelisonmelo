@@ -1,0 +1,357 @@
+/* ------------------------------------------------------------------
+   Link na bio | Elison Melo
+------------------------------------------------------------------- */
+
+:root {
+  --tinta: #050505;
+  --papel: #eceae4;
+  --apagado: #8f8d86;
+  --linha: rgba(236, 234, 228, 0.13);
+  --linha-forte: rgba(236, 234, 228, 0.82);
+  --frio: #e6ecfb;
+  --azul: #2b4d9c;
+  --ambar: #c97a2a;
+
+  --coluna: 20rem;     /* largura do retrato */
+  --largura: 35rem;    /* largura dos botões */
+  --margem: 1rem;
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+
+body {
+  margin: 0;
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--display);
+  font-size: 1rem;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, p { margin: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--papel);
+  outline-offset: 3px;
+}
+
+/* ---------- Grade de fundo ---------- */
+
+.grade {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.grade i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--linha);
+}
+.grade i:nth-child(1) { left: var(--margem); }
+.grade i:nth-child(2) { left: calc(50% - min(var(--coluna), 78vw) / 2); }
+.grade i:nth-child(3) { left: calc(50% + min(var(--coluna), 78vw) / 2); }
+.grade i:nth-child(4) { right: var(--margem); }
+
+/* ---------- Estrutura ---------- */
+
+.pagina {
+  position: relative;
+  z-index: 1;
+}
+
+.topo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 6.5rem var(--margem) 0;
+}
+
+/* Feixe de luz que passa atrás do retrato */
+.feixe {
+  position: absolute;
+  top: 5.5rem;
+  left: -15%;
+  right: -15%;
+  height: 8.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--azul) 14%,
+    var(--frio) 32%,
+    #f5f3ee 50%,
+    var(--frio) 68%,
+    var(--azul) 86%,
+    transparent 100%
+  );
+  filter: blur(26px);
+  opacity: 0.92;
+  animation: deriva 16s ease-in-out infinite alternate;
+}
+.feixe::before {
+  content: "";
+  position: absolute;
+  left: 38%;
+  right: 38%;
+  top: -3.5rem;
+  height: 3rem;
+  background: var(--ambar);
+  filter: blur(30px);
+  opacity: 0.7;
+}
+
+@keyframes deriva {
+  from { transform: translateX(-3%) scaleY(0.92); }
+  to   { transform: translateX(3%) scaleY(1.08); }
+}
+
+/* ---------- Retrato ---------- */
+
+.retrato {
+  position: relative;
+  width: min(var(--coluna), 78vw);
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(160deg, #26262a 0%, #0c0c0d 70%);
+  border: 1px solid var(--linha);
+  overflow: hidden;
+}
+.retrato img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.08);
+}
+.monograma {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 5.5rem;
+  letter-spacing: -0.06em;
+  color: rgba(236, 234, 228, 0.16);
+}
+
+/* ---------- Texto do topo ---------- */
+
+.assinatura {
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.assinatura span { color: var(--apagado); margin: 0 0.35em; }
+
+.titulo {
+  margin-top: 0.7rem;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 8.4vw, 3.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+.titulo span { display: block; white-space: nowrap; }
+
+.frase {
+  margin-top: 1.4rem;
+  max-width: 23rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--linha);
+  background: var(--tinta);
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* ---------- Redes ---------- */
+
+.redes {
+  display: flex;
+  margin-top: 1.25rem;
+  border: 1px solid var(--linha);
+  background: var(--tinta);
+}
+.redes li + li { border-left: 1px solid var(--linha); }
+.redes a,
+.redes span {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.1rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+.redes span { color: rgba(236, 234, 228, 0.28); }
+.redes svg { width: 1.3rem; height: 1.3rem; }
+
+/* ---------- Bloco de links ---------- */
+
+.bloco {
+  max-width: calc(var(--largura) + var(--margem) * 2);
+  margin: 4.5rem auto 0;
+  padding: 0 var(--margem);
+}
+
+.rotulo {
+  padding: 0 1.1rem 0.9rem;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.links li + li { margin-top: -1px; }
+
+.link {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.1rem;
+  border: 1px solid var(--linha);
+  background: var(--tinta);
+  transition: background-color 0.22s, color 0.22s, border-color 0.22s;
+}
+.link--destaque {
+  border-color: var(--linha-forte);
+  z-index: 1;
+}
+.link__icone { width: 1.4rem; height: 1.4rem; flex: none; }
+.link__titulo {
+  display: block;
+  font-weight: 800;
+  font-size: clamp(1.15rem, 5.4vw, 1.45rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.link__descricao {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--apagado);
+  transition: color 0.22s;
+}
+.link__seta {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--apagado);
+  transition: transform 0.22s, color 0.22s;
+}
+
+/* ---------- Fecho e rodapé ---------- */
+
+.fim { margin-top: 7rem; }
+
+.fecho {
+  padding: 0 var(--margem);
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 5vw, 1.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.barra {
+  display: grid;
+  grid-template-columns: 1fr min(var(--coluna), 78vw) 1fr;
+  margin: 2.75rem var(--margem) 6rem;
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
+}
+.barra__item {
+  display: grid;
+  place-items: center;
+  min-height: 3.25rem;
+  padding: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+.barra__item--cta {
+  background: var(--papel);
+  color: var(--tinta);
+  font-weight: 500;
+}
+.barra__item[hidden] { display: none; }
+
+/* ---------- Interação ---------- */
+
+@media (hover: hover) {
+  .link:hover {
+    background: var(--papel);
+    border-color: var(--papel);
+    color: var(--tinta);
+    z-index: 2;
+  }
+  .link:hover .link__descricao { color: #4a4944; }
+  .link:hover .link__seta { color: var(--tinta); transform: translateX(5px); }
+  .redes a:hover,
+  a.barra__item:not(.barra__item--cta):hover { background: var(--papel); color: var(--tinta); }
+  .barra__item--cta:hover { background: #fff; }
+}
+.link:active {
+  background: var(--papel);
+  border-color: var(--papel);
+  color: var(--tinta);
+}
+.link:active .link__descricao { color: #4a4944; }
+.link:active .link__seta { color: var(--tinta); }
+
+/* ---------- Entrada ---------- */
+
+.surge {
+  animation: surge 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+@keyframes surge {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surge, .feixe { animation: none; }
+  .link, .link__seta, .redes a, .barra__item { transition: none; }
+}
+
+/* ---------- Telas pequenas ---------- */
+
+@media (max-width: 33rem) {
+  .topo { padding-top: 5rem; }
+  .feixe { top: 4.25rem; height: 7rem; }
+  .bloco { margin-top: 3.5rem; }
+  .link { gap: 0.8rem; padding: 1.05rem 0.9rem; }
+  .rotulo { padding-left: 0.9rem; padding-right: 0.9rem; }
+  .fim { margin-top: 5rem; }
+  .barra { grid-template-columns: 1fr 1fr; margin-bottom: 4rem; }
+  .barra__item--cta { grid-column: 1 / -1; grid-row: 1; min-height: 3.5rem; }
+  .barra__item:not(.barra__item--cta) { border-top: 1px solid var(--linha); }
+  .barra__item:last-child:not([hidden]) { border-left: 1px solid var(--linha); }
+  .barra--sem-instagram .barra__item:first-child { grid-column: 1 / -1; }
+}
