@@ -137,7 +137,8 @@ h1, h2, p { margin: 0; }
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  /* Para preto e branco, como na referência: filter: grayscale(1) contrast(1.08); */
+  /* Preto e branco. Para voltar às cores, apague a linha abaixo. */
+  filter: grayscale(1) contrast(1.08);
 }
 .monograma {
   position: absolute;
